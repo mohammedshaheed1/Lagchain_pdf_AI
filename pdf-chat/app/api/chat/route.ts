@@ -6,6 +6,10 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 import { ChatOpenAI } from "@langchain/openai";
 import { processUserMessage } from "@/lib/langchain";
 import { getPineconeClient } from "@/lib/pinecone-client";
+import { VectorStore } from "@langchain/core/vectorstores";
+import { BaseChatModel } from "@langchain/core/language_models/chat_models";
+
+
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
