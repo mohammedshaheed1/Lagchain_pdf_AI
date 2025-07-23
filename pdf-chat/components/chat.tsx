@@ -16,9 +16,21 @@ export function Chat() {
     initialMessages,
   });
 
+  // useEffect(() => {
+  //   setTimeout(() => scrollToBottom(containerRef), 100);
+  // }, [messages]);
+
   useEffect(() => {
-    setTimeout(() => scrollToBottom(containerRef), 100);
-  }, [messages]);
+  setTimeout(() => scrollToBottom(containerRef), 100);
+
+  const last = messages[messages.length - 1];
+
+  if (last?.role === "assistant" && last.content.startsWith("__TRIGGER_ALERT__")) {
+    const alertMessage = last.content.replace("__TRIGGER_ALERT__", "").trim();
+    alert(alertMessage); // Show browser alert
+  }
+}, [messages]);
+
 
   return (
     <div className=" flex justify-between">

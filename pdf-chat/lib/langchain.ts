@@ -90,11 +90,33 @@ Rules:
   ["human", "USER PROMPT: {userPrompt}\n\nCONVERSATION LOG: {conversationHistory}"],
 ]);
 
-// 🧠 Contextual QA prompt
+// // 🧠 Contextual QA prompt
+// const qaPrompt = ChatPromptTemplate.fromMessages([
+//   [
+//     "system",
+//     `You are a precise, context-aware assistant. Use only the context to answer. If something is missing, say so.
+
+// Rules:
+// - Base answers on the provided context
+// - Do not guess or add anything not in context
+// - Clearly state if info is missing
+// - Highlight exact quotes when possible
+
+// Context:
+// {context}`,
+//   ],
+//   ["human", "Question: {question}"],
+// ]);
+
+
 const qaPrompt = ChatPromptTemplate.fromMessages([
   [
     "system",
-    `You are a precise, context-aware assistant. Use only the context to answer. If something is missing, say so.
+    `You are a precise, context-aware assistant. Use only the context to answer. 
+If the user asks to be alerted, respond using this format:
+__TRIGGER_ALERT__ Your alert message here
+
+Otherwise, respond normally.
 
 Rules:
 - Base answers on the provided context
@@ -103,7 +125,7 @@ Rules:
 - Highlight exact quotes when possible
 
 Context:
-{context}`,
+{context}`
   ],
   ["human", "Question: {question}"],
 ]);
